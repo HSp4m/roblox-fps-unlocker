@@ -1,0 +1,82 @@
+import { Button, VerticalBox, ComboBox, HorizontalBox, ListView } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    property <int> full_width: 340px / 1px;
+    property <string> method: "1";
+    in-out property <string> result: "";
+    callback request-unlock(string);
+
+    title: "By Hsp4m";
+    /*width: 360px;
+    height: 180px;*/
+
+    GridLayout {
+        padding: 50px;
+        spacing: 25px;
+
+        Row {
+            Text {
+                text: "Roblox fps unlocker";
+                color: gray;
+                horizontal-alignment: center;
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+
+        Row {
+            Text {
+                
+                text: "Select the unlock method: ";
+            }
+        }
+
+        Row {
+            
+            ComboBox {
+                
+                width: full_width * 1px;
+                height: 30px;
+                model: ["Low (bad pc)", "Normal", "Uninstall (remove)"];
+                current-index: 1;
+                selected => {
+                    method = self.current-index
+                }
+            }
+        }
+
+        Row {
+            Button {
+                primary: true;
+                height: 35px;
+                text: "Unlock";
+                clicked => {
+                    root.request-unlock(method);
+                }
+            }
+        }
+
+        Row {
+            VerticalBox {
+                Text {
+                    color: #59bce9;
+                    text: "Log";
+                    horizontal-alignment: center;
+                }
+                Rectangle {
+                    height: 100px;
+                    border-radius: 2px;
+                    background: #2e2e2e;
+                    
+                    Text {
+                        color: gray;
+                        text: result;
+                        font-size: 12px;
+                        font-weight: 500;
+                        horizontal-alignment: left;
+                    }
+                }
+            }
+        }
+    }
+}
