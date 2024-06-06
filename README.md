@@ -7,7 +7,8 @@
 ### Normal use
 
 #### Download the latest release
-> [Download here](https://github.com/HSp4m/roblox-fps-unlocker/releases/latest)
+> [Download here](https://github.com/HSp4m/roblox-fps-unlocker/releases/latest/download/roblox-fps-unlocker.exe)
+
 
 ###### Now just run the 'Roblox-fps-unlocker.exe' and unlock your fps :)
 
