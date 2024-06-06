@@ -65,27 +65,30 @@ fn main() -> Result<(), slint::PlatformError> {
 
             ui.set_result("[*] Starting process".into());
 
-            if !path_exists(path_settings) {
+            if !path_exists(path_settings) && get_method_name(method) != "uninstall" {
                 ui.set_result("[+] Creating folder".into());
                 fs::create_dir(path_settings).expect("An error ocurred");
             }
             
-            if path_exists(path_settings) {
-                if get_method_name(method) != "uninstall" {
-                    ui.set_result("[+] Creating files".into());
-                    let mut create_file = fs::File::create(path_settings_file).expect("An error ocurred while trying to create the config file.");
-                    
-                    if path_exists(path_settings_file) {
-                        if get_method_name(method) == "low" {
-                            create_file.write_all(low_config.text().unwrap().as_bytes()).expect("An error ocurred while trying to write to the config");
-                        } else if get_method_name(method) == "normal" {
-                            create_file.write_all(normal_config.text().unwrap().as_bytes()).expect("An error ocurred while trying to write to the config");
-                        }
+            if path_exists(path_settings) && get_method_name(method) != "uninstall" {
+                ui.set_result("[+] Creating files".into());
+                let mut create_file = fs::File::create(path_settings_file).expect("An error ocurred while trying to create the config file.");
+                
+                if path_exists(path_settings_file) {
+                    if get_method_name(method) == "low" {
+                        create_file.write_all(low_config.text().unwrap().as_bytes()).expect("An error ocurred while trying to write to the config");
+                    } else if get_method_name(method) == "normal" {
+                        create_file.write_all(normal_config.text().unwrap().as_bytes()).expect("An error ocurred while trying to write to the config");
                     }
-                    
-                    ui.set_result("[OK] Finished.\n- Start roblox to see the change".into());
+                }
+                
+                ui.set_result("[OK] Finished.\n- Start roblox to see the change".into());
+            }
+            
+            if get_method_name(method) == "uninstall" {
+                if !path_exists(path_settings) {
+                    ui.set_result("[ALERT] Finished with alert.\n- The config is already removed".into());
                 } else {
-
                     ui.set_result("[-] Removing folders".into());
                     fs::remove_dir_all(path_settings).expect("An error ocurred while trying remove the config folder.");
 
@@ -94,9 +97,7 @@ fn main() -> Result<(), slint::PlatformError> {
                     } else {
                         ui.set_result("[OK] Finished.\n- Config has been successfully removed".into());
                     }
-
                 }
-                
             }
             
 

@@ -1,6 +1,6 @@
 [package]
 name = "roblox-fps-unlocker"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["HSp4m <sp4m787@gmail.com>"]
 edition = "2021"
 build = "build.rs"
