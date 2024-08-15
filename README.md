@@ -15,9 +15,6 @@
 ### Development
 
 #### Clone the repository
-```Bash
-git clone https://github.com/HSp4m/react-beginner-projects
-```
 
 #### Navigate to the app directory
 ```Bash
